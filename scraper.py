@@ -4,6 +4,7 @@ import pycountry
 import time
 import traceback
 import random
+import csv
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 from selenium.webdriver.support import expected_conditions as EC # available since 2.26.0
@@ -84,8 +85,11 @@ def check_arguments(arguments, input_countries_alpha):
     return save
 
 # Save the results in a csv file
-def save_results_in_csv():
+def save_results_in_csv(results):
     print("saving results to results.csv")
+    with open('results.csv', 'w') as result_file:
+        w = csv.writer(result_file, delimiter='\n')
+        w.writerow(results)
     return
 
 def main():
@@ -103,7 +107,7 @@ def main():
     if (open_webdriver(input_countries_alpha, results) == 1):
         exit
     elif (save == 1):
-        save_results_in_csv()
+        save_results_in_csv(results)
     else:
         print_results(results)
         print(input_countries_alpha)
