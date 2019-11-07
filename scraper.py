@@ -5,8 +5,6 @@ import time
 import traceback
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
-from selenium.webdriver.common.touch_actions import TouchActions
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC # available since 2.26.0
 
 # convert the @input_countries_alpha into their correct name and append it to @countries_name
@@ -27,8 +25,6 @@ def get_four_countries(driver, results):
             country = pycountry.countries.get(name=driver.find_element_by_xpath('//*[@id="row' + str(position) + 'jqx-ProductGrid"]/div[1]/a').text).alpha_3
             export = driver.find_element_by_xpath('//*[@id="row' + str(position) + 'jqx-ProductGrid"]/div[2]/div').text
             country += ' ' + export.partition(",")[0] + 'B'
-
-            print('country = %s' % country)
             results.append(country)
 
         except:
