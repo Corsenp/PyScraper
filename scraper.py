@@ -9,16 +9,6 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 from selenium.webdriver.support import expected_conditions as EC # available since 2.26.0
 
-# Convert the @input_countries_alpha into their correct name and append it to @countries_name
-def convert_country_alpha3_to_country_name(input_countries_alpha, countries_name):
-    
-    alphas = {}
-
-    for alpha in pycountry.countries:
-        alphas[alpha.alpha_3] = alpha.name
-
-    countries_name.append(alphas.get(input_countries_alpha[0]))
-
 # Get five random country (alpha3) from pycountry and append it to @input_countries_alpha
 def random_grab_five_countries(input_countries_alpha):
     index = 0
@@ -34,7 +24,8 @@ def get_four_countries(driver, results):
         try:
             country_name = pycountry.countries.get(name=driver.find_element_by_xpath('//*[@id="row' + str(position) + 'jqx-ProductGrid"]/div[1]/a').text).alpha_3
             export = driver.find_element_by_xpath('//*[@id="row' + str(position) + 'jqx-ProductGrid"]/div[2]/div').text
-            country = country_name + ' ' + export.partition(",")[0] + 'B'
+            #country = country_name + ' ' + export.partition(",")[0] + 'B'
+            country = country_name + ' ' + export
             results.append(country)
 
         except Exception:
@@ -94,7 +85,6 @@ def save_results_in_csv(results):
 
 def main():
     input_countries_alpha = []
-    countries_name = []
     results = []
     arguments = len(sys.argv) - 1
     
@@ -103,7 +93,6 @@ def main():
         return 1
 
     save = check_arguments(arguments, input_countries_alpha)
-    convert_country_alpha3_to_country_name(input_countries_alpha, countries_name)
     if (open_webdriver(input_countries_alpha, results) == 1):
         exit
     elif (save == 1):
