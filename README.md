@@ -28,7 +28,7 @@ Usage: scraper.py [COMMAND]
 Command:
 ISOCODE - Will print the Top 4 countries that received imports and the import amount in 2017 from the country ISOCODE
 all     - Pick 4 random countries and print their respective Top 4 countries that received imports and the import amount in 2017
-save    - Will save the result to a csv file named result.csv
+save    - Will save the result to a csv file named results.csv
 ```
 
 ## License
