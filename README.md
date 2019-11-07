@@ -17,3 +17,6 @@ pip install selenium
 ```
 
 If you have any trouble installing selenium go check the [official documentation](https://selenium-python.readthedocs.io/installation.html)
+
+## License
+[GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)
