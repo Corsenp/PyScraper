@@ -35,8 +35,12 @@ def get_four_countries(driver, results):
 
 # open the chrome client
 def open_webdriver(input_countries_alpha, results):
-    driver = webdriver.Chrome(executable_path=".//chromedriver")
-    driver.maximize_window()
+    try:
+        driver = webdriver.Chrome(executable_path=".//chromedriver")
+        driver.maximize_window()
+    except:
+        print("chromedriver not found, please place it on the root of the project's folder")
+        return 1
     
     try:
         driver.get('https://wits.worldbank.org/CountryProfile/en/Country/'+ input_countries_alpha[0] +'/Year/2017/TradeFlow/Export/Partner/by-country/Product/Total')
@@ -70,9 +74,10 @@ def main():
 
     check_arguments(arguments, input_countries_alpha)
     convert_country_alpha3_to_country_name(input_countries_alpha, countries_name)
-    open_webdriver(input_countries_alpha, results)
-
-    print(results)
+    if (open_webdriver(input_countries_alpha, results) == 1):
+        exit
+    else:
+        print(results)
 
 
 
