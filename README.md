@@ -10,3 +10,10 @@ Python 3 is required in order to run this program
 ```bash
 brew install python3
 ```
+
+Then we install selenium with the package manager [pip](https://pip.pypa.io/en/stable/)
+```bash
+pip install selenium
+```
+
+If you have any trouble installing selenium go check the [official documentation](https://selenium-python.readthedocs.io/installation.html)
