@@ -41,7 +41,7 @@ def print_results(results):
     return
 
 # Open the chrome client
-def open_webdriver(input_countries_alpha, results):
+def open_webdriver(input, results):
     try:
         driver = webdriver.Chrome(executable_path=".//chromedriver")
         driver.maximize_window()
@@ -50,7 +50,7 @@ def open_webdriver(input_countries_alpha, results):
         return 1
     
     try:
-        driver.get('https://wits.worldbank.org/CountryProfile/en/Country/'+ input_countries_alpha[0] +'/Year/2017/TradeFlow/Export/Partner/by-country/Product/Total')
+        driver.get('https://wits.worldbank.org/CountryProfile/en/Country/'+ input +'/Year/2017/TradeFlow/Export/Partner/by-country/Product/Total')
         get_four_countries(driver, results)
 
     except Exception:
@@ -93,9 +93,11 @@ def main():
         return 1
 
     save = check_arguments(arguments, input_countries_alpha)
-    if (open_webdriver(input_countries_alpha, results) == 1):
-        exit
-    elif (save == 1):
+    for input in input_countries_alpha:
+        if (open_webdriver(input, results) == 1):
+            exit
+    
+    if (save == 1):
         save_results_in_csv(results)
     else:
         print_results(results)
